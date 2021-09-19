@@ -2,8 +2,10 @@ import React from "react";
 
 const Home = () => {
     return (
-        <div>
-            <h2>Home</h2>
+        <div className="home_wrapper">
+            <div className="nav_wrapper">
+                <button>logout</button>
+            </div>
         </div>
     )
 }
