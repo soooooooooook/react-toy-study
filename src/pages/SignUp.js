@@ -1,28 +1,28 @@
 import React from "react";
 
 const SignUp = () => {
-    const joinForm = document.getElementById('joinForm');
+    // const joinForm = document.getElementById('joinForm');
 
-    joinForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        let email = document.getElementById('email').value;
-        let name = document.getElementById('name').value;
-        let password = document.getElementById('password').value;
-
-        const url = 'https://jssampletest.herokuapp.com/api/auth/signup';
-        let data = { email: email, name: name, password: password };
-        console.log(data);
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.text())
-            .then((response) => console.log(response));
-    });
+    // joinForm.addEventListener('submit', function (e) {
+    //     e.preventDefault();
+    //
+    //     let email = document.getElementById('email').value;
+    //     let name = document.getElementById('name').value;
+    //     let password = document.getElementById('password').value;
+    //
+    //     const url = 'https://jssampletest.herokuapp.com/api/auth/signup';
+    //     let data = { email: email, name: name, password: password };
+    //     console.log(data);
+    //     fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data),
+    //     })
+    //         .then((response) => response.text())
+    //         .then((response) => console.log(response));
+    // });
 
     return(
         <div>
