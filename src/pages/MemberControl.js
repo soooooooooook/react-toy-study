@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../enum/url";
 import User from "./User";
 import {logout} from "../features/userSlice";
+import member from "../styles/member.css";
 
-const MemberControl = () => {
+const MemberControl = (props) => {
     useEffect(() => {
         if (users.length === 0) {
             getUserList();
@@ -16,45 +17,82 @@ const MemberControl = () => {
         }
     });
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [users, setUsers] = useState([]);
     const {user} = useSelector(state => state.user);
 
     if (!user?.loggedIn) {
-        return <Redirect to="/login"/>;
+        return <Redirect to="/"/>;
     }
-
-
     const getUserList = () => {
-        axios.get(baseUrl + 'member/all')
-            .then(res => {
-                return setUsers(res.data.data);
+        axios.get(
+                baseUrl + 'member/all',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            )
+            .then(response => {
+                return setUsers(response.data.data);
             })
             .catch(console.log);
     }
+
+    const deleteMember = (data) => {
+        const email = data;
+
+        axios.delete(
+            baseUrl + 'member/' + email,
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+        )
+            .then(response => {
+                getUserList();
+            })
+            .catch(response => console.log(response))
+
+    }
+
+    const editMember = (data) => {
+        console.log(data);
+        axios.put(baseUrl + 'member/', data,
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(response => {
+                console.log(response)
+                getUserList();
+            })
+            .catch(reason => console.log(reason))
+    }
+
     const onClickLogout = () => {
         dispatch(
             logout()
         );
-        history.push('/login');
+        props.history.push('/');
     }
 
     return (
         <div>
-            <h1>member</h1>
-            <div>{user.token}</div>
-            <button id="allButton">All</button>
-            {users.map(user => (
-                <User user={user} key={user.seq}/>
-            ))}
-            <div>
-                <label htmlFor="email">email</label>
-                <input type="text" id="email"/>
-                <button id="oneButton">search</button>
+            <div className="header-wrapper">
+                <h1>Member</h1>
+                <button className="logout_button" onClick={onClickLogout}>Logout</button>
             </div>
-            <button onClick={onClickLogout}>logout</button>
-            <ul className="data"></ul>
+            <div className="body-wrapper">
+                {users.map(user => (
+                    <User user={user}
+                          key={user.seq}
+                          deleteMember={deleteMember}
+                          editMember={editMember}/>
+                ))}
+            </div>
         </div>
     )
 }

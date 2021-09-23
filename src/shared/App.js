@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Login, MemberControl, SignUp} from '../pages'
 import {Route} from "react-router-dom";
 import {login} from "../features/userSlice";
@@ -15,11 +15,11 @@ const App = () => {
             })
         );
     }
+
     return (
         <div>
-            {/*<Login></Login>*/}
             {/*<Route exact path="/" component={ Home }></Route>*/}
-            <Route path="/login" component={ Login }></Route>
+            <Route exact path="/" component={ Login }></Route>
             <Route path="/signup" component={ SignUp }></Route>
             <Route path="/member" component={ MemberControl }></Route>
         </div>

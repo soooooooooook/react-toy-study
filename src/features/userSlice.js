@@ -13,10 +13,13 @@ export const userSlice = createSlice({
             state.user = null;
             localStorage.removeItem('token');
         },
+        signUp: (state, action) => {
+            state.user = action.payload;
+        }
     },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, signUp } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 
