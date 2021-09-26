@@ -3,9 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../enum/url";
-import User from "./User";
+import Users from "./Users";
 import {logout} from "../features/userSlice";
-import member from "../styles/member.css";
+import "../styles/member.css";
 
 const MemberControl = (props) => {
     useEffect(() => {
@@ -20,21 +20,27 @@ const MemberControl = (props) => {
 
     const [users, setUsers] = useState([]);
     const {user} = useSelector(state => state.user);
+    const [selectedMemberInfo, setMemberInfo] = useState(null);
+    // const [name, setName] = useState("");
 
     if (!user?.loggedIn) {
         return <Redirect to="/"/>;
     }
     const getUserList = () => {
+        const saveToken = localStorage.getItem('token'); // string
+        const tokenToObject = JSON.parse(saveToken);
+
         axios.get(
-                baseUrl + 'member/all',
-                {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
+            baseUrl + 'member/all',
+            {
+                headers: {
+                    // 'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${tokenToObject.accessToken}`
                 }
-            )
+            }
+        )
             .then(response => {
-                return setUsers(response.data.data);
+                return setUsers(response.data.data.content);
             })
             .catch(console.log);
     }
@@ -58,7 +64,19 @@ const MemberControl = (props) => {
     }
 
     const editMember = (data) => {
-        console.log(data);
+        axios.get(
+            baseUrl + 'member/?email=' + data,
+            {
+                headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
+            })
+            .then(response => {
+                return setMemberInfo(response.data.data);
+            })
+            .catch(reason => console.log(reason))
+    }
+
+    const changeName = () => {
+        const data = {name: selectedMemberInfo.name, email: selectedMemberInfo.email}
         axios.put(baseUrl + 'member/', data,
             {
                 headers: {
@@ -70,6 +88,13 @@ const MemberControl = (props) => {
                 getUserList();
             })
             .catch(reason => console.log(reason))
+        setMemberInfo(null);
+    }
+
+    const info = (name) => {
+        const member = {...selectedMemberInfo};
+        member.name = name;
+        setMemberInfo(member);
     }
 
     const onClickLogout = () => {
@@ -87,11 +112,23 @@ const MemberControl = (props) => {
             </div>
             <div className="body-wrapper">
                 {users.map(user => (
-                    <User user={user}
-                          key={user.seq}
-                          deleteMember={deleteMember}
-                          editMember={editMember}/>
+                    <Users user={user}
+                           key={user.seq}
+                           deleteMember={deleteMember}
+                           editMember={editMember}/>
                 ))}
+                {
+                    selectedMemberInfo ?
+                        <div className="editMember-wrapper">
+                            <div>
+                                name: <input type="name" value={selectedMemberInfo.name || ''}
+                                             onChange={(e) => info(e.target.value)}/>
+                                email: {selectedMemberInfo.email}
+                                authority: {selectedMemberInfo.authority}
+                            </div>
+                            <button onClick={changeName}>완료</button>
+                        </div> : ''
+                }
             </div>
         </div>
     )
