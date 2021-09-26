@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {login} from '../features/userSlice';
 import axios from "axios";
 import baseUrl from "../enum/url";
+import jwtDecode from "jwt-decode";
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -23,13 +24,15 @@ const Login = (props) => {
                 console.log('사용자 정보',result.data);
                 if (result.data === ex401) return;
                 if (result.data.accessToken) {
+                    const info = jwtDecode(result.data.accessToken);
                     dispatch(
                         login({
                             token: result.data.accessToken,
                             loggedIn: true,
                         })
                     );
-                    localStorage.setItem( 'token' , result.data.accessToken);
+                    // localStorage.setItem( 'token' , info);
+                    localStorage.setItem( 'token' , JSON.stringify({...result.data, ...info}));
                     props.history.push('/member');
                 }
             })
