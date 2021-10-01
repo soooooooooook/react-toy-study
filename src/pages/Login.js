@@ -9,9 +9,7 @@ import jwtDecode from "jwt-decode";
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const dispatch = useDispatch();
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -31,7 +29,6 @@ const Login = (props) => {
                             loggedIn: true,
                         })
                     );
-                    // localStorage.setItem( 'token' , info);
                     localStorage.setItem( 'token' , JSON.stringify({...result.data, ...info}));
                     props.history.push('/member');
                 }
