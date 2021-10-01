@@ -17,8 +17,12 @@
     color: white;
     cursor: pointer;
 }
-
+.body-layout {
+    display: flex;
+    justify-content: center;
+}
 .body-wrapper {
+    width: 1200px;
     padding: 50px;
 }
 
@@ -43,6 +47,19 @@
     cursor: pointer;
 }
 
+.table-header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    font-weight: 700;
+    padding: 0 20px;
+    background-color: #eee;
+    /*border-bottom: 1px solid #aaa;*/
+}
+.table-header div {
+    width: 250px;
+    max-width: 250px;
+}
 .user-list {
     display: flex;
     align-items: center;
@@ -61,11 +78,55 @@
     font-weight: 500;
 }
 
-.delete_button {
+.edit_button {
     height: 30px;
     width: 80px;
-    margin-right: 20px;
     background-color: white;
     border: 1px solid black;
     cursor: pointer;
+    margin-left: auto;
 }
+
+.edit_button.del {
+    margin-left: 20px;
+}
+
+.editMember-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    border: 1px solid black;
+    margin-bottom: 50px;
+}
+
+.editMember-wrapper ul {
+    margin-bottom: 20px;
+}
+
+.editMember-wrapper ul li {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.editMember-wrapper ul li:last-child {
+    margin-bottom: 0;
+}
+
+.editMember-wrapper ul li strong {
+    display: inline-block;
+    width: 100px;
+}
+
+.done_button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 30px;
+    padding: 0 20px;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
