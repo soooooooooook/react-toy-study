@@ -5,30 +5,35 @@ import axios from "axios";
 import baseUrl from "../enum/url";
 import Users from "./Users";
 import {logout} from "../features/userSlice";
+import PageNation from "./PageNation"
 import "../styles/member.css";
 
 const MemberControl = (props) => {
     useEffect(() => {
-        if (users.length === 0) {
-            getUserList();
+        if (!users) {
+            setUsers([]);
+            getUserList(0);
         }
     });
 
     const dispatch = useDispatch();
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const {user} = useSelector(state => state.user);
     const [selectedMemberInfo, setMemberInfo] = useState(null);
     const saveToken = localStorage.getItem('token');
     const tokenToObject = JSON.parse(saveToken);
-    const headers = {headers:{'Authorization': `Bearer ${tokenToObject.accessToken}`}}
+    const headers = {headers: {'Authorization': `Bearer ${tokenToObject.accessToken}`}}
+    const [page, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     if (!user?.loggedIn) {
         return <Redirect to="/"/>;
     }
 
-    const getUserList = () => {
-        axios.get(baseUrl + 'member/all', headers)
+    const getUserList = (page) => {
+        axios.get(baseUrl + `member/all?page=${page}&size=10`, headers)
             .then(response => {
+                setPages(response.data.data.totalPages);
                 return setUsers(response.data.data.content);
             })
             .catch(reason => console.log(reason));
@@ -52,7 +57,7 @@ const MemberControl = (props) => {
     }
 
     const changeName = () => {
-        const data = { name: selectedMemberInfo.name, email: selectedMemberInfo.email }
+        const data = {name: selectedMemberInfo.name, email: selectedMemberInfo.email}
         axios.put(baseUrl + 'member/', data, headers)
             .then(response => {
                 getUserList();
@@ -62,7 +67,7 @@ const MemberControl = (props) => {
     }
 
     const changeAuth = () => {
-        const data = { authority: selectedMemberInfo.authority, email: selectedMemberInfo.email };
+        const data = {authority: selectedMemberInfo.authority, email: selectedMemberInfo.email};
         axios.put(baseUrl + 'member/auth', data, headers)
             .then(response => {
                 getUserList();
@@ -94,6 +99,17 @@ const MemberControl = (props) => {
         props.history.push('/');
     }
 
+    const pageActions = (i) => {
+        getUserList(i);
+        setCurrentPage(i);
+    }
+
+    const firstLastPageMove = (value) => {
+        if(value === 0) getUserList(0)
+        else getUserList(page - 1)
+    }
+
+    if (!users) return '<div>로딩중</div>';
     return (
         <div>
             <div className="header-wrapper">
@@ -102,41 +118,47 @@ const MemberControl = (props) => {
             </div>
             <div className="body-layout">
                 <div className="body-wrapper">
-                {
-                    selectedMemberInfo ?
-                        <div className="editMember-wrapper">
-                            <ul>
-                                <li>
-                                    <strong>Name :</strong>
-                                    <input className="edit_form" type="name" value={selectedMemberInfo.name || ''}
-                                           onChange={(e) => infoName(e.target.value)}/>
-                                </li>
-                                <li>
-                                    <strong>Email :</strong>{selectedMemberInfo.email}
-                                </li>
-                                <li>
-                                    <strong>Authority :</strong>
-                                    <select className="edit_form" onChange={(e) => infoAuth(e.target.value)}>
-                                        <option value="ROLE_USER">USER</option>
-                                        <option value="ROLE_ADMIN">ADMIN</option>
-                                    </select>
-                                </li>
-                            </ul>
-                            <button className="done_button" onClick={changeInfo}>완료</button>
-                        </div> : ''
-                }
-                <div className="table-header">
-                    <div>Name</div>
-                    <div>Email</div>
-                    <div>Authority</div>
+                    {
+                        selectedMemberInfo ?
+                            <div className="editMember-wrapper">
+                                <ul>
+                                    <li>
+                                        <strong>Name :</strong>
+                                        <input className="edit_form" type="name" value={selectedMemberInfo.name || ''}
+                                               onChange={(e) => infoName(e.target.value)}/>
+                                    </li>
+                                    <li>
+                                        <strong>Email :</strong>{selectedMemberInfo.email}
+                                    </li>
+                                    <li>
+                                        <strong>Authority :</strong>
+                                        <select className="edit_form" onChange={(e) => infoAuth(e.target.value)}>
+                                            <option value="ROLE_USER">USER</option>
+                                            <option value="ROLE_ADMIN">ADMIN</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                                <button className="done_button" onClick={changeInfo}>완료</button>
+                            </div> : ''
+                    }
+                    <div className="table-header">
+                        <div>Name</div>
+                        <div>Email</div>
+                        <div>Authority</div>
+                    </div>
+                    <div className="page-list-wrapper">
+                        {users.map(user => (
+                            <Users user={user}
+                                   key={user.seq}
+                                   deleteMember={deleteMember}
+                                   editMember={editMember}/>
+                        ))}
+                    </div>
+                    <PageNation page={page}
+                                pageActions={pageActions}
+                                currentPage={currentPage}
+                                firstLastPageMove={firstLastPageMove}></PageNation>
                 </div>
-                {users.map(user => (
-                    <Users user={user}
-                           key={user.seq}
-                           deleteMember={deleteMember}
-                           editMember={editMember}/>
-                ))}
-            </div>
             </div>
         </div>
     )
