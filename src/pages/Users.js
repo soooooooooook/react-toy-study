@@ -1,6 +1,4 @@
-import React, {useState} from "react";
-import baseUrl from "../enum/url";
-import axios from "axios";
+import React from "react";
 
 function Users(props) {
     const deleteMemberEvent = () => {

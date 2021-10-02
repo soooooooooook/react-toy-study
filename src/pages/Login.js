@@ -19,7 +19,6 @@ const Login = (props) => {
         axios.post(baseUrl + 'auth/login', data)
             .then(response => {
                 const result = response.data;
-                console.log('사용자 정보',result.data);
                 if (result.data === ex401) return;
                 if (result.data.accessToken) {
                     const info = jwtDecode(result.data.accessToken);

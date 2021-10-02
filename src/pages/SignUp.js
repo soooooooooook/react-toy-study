@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import {useDispatch} from 'react-redux';
-import {signUp} from '../features/userSlice';
 import axios from "axios";
 import baseUrl from "../enum/url";
 import "../styles/login.css"
