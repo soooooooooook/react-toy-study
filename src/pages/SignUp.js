@@ -16,7 +16,6 @@ const SignUp = (props) => {
 
         axios.post(baseUrl + 'auth/signup', data)
             .then(response => {
-                const result = response.data;
                 props.history.push('/');
             })
             .catch(reason => {

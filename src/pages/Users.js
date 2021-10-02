@@ -13,7 +13,7 @@ function Users(props) {
                 <span>{props.user.name}</span>
             </span>
             <span className="email">{props.user.email}</span>
-            <span>{props.user.authority == 'ROLE_USER' ? 'USER' : 'ADMIN'}</span>
+            <span>{props.user.authority === 'ROLE_USER' ? 'USER' : 'ADMIN'}</span>
             <button className="edit_button" onClick={editMemberEvent}>Edit</button>
             <button className="edit_button del" onClick={deleteMemberEvent}>Delete</button>
         </div>
