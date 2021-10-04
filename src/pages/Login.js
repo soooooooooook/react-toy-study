@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import "../styles/login.css"
 import {useDispatch} from 'react-redux';
 import {login} from '../features/userSlice';
-import axios from "axios";
-import baseUrl from "../enum/url";
 import jwtDecode from "jwt-decode";
+import * as authApi from "../service/auth"
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -14,9 +13,8 @@ const Login = (props) => {
         e.preventDefault();
 
         const ex401 = '자격 증명에 실패하였습니다.';
-        let data = {email: email, password: password};
 
-        axios.post(baseUrl + 'auth/login', data)
+        authApi.login(email, password)
             .then(response => {
                 const result = response.data;
                 if (result.data === ex401) return;
@@ -28,13 +26,10 @@ const Login = (props) => {
                             loggedIn: true,
                         })
                     );
-                    localStorage.setItem( 'token' , JSON.stringify({...result.data, ...info}));
+                    localStorage.setItem('token', JSON.stringify({...result.data, ...info}));
                     props.history.push('/member');
                 }
             })
-            .catch(response => {
-                console.log(response)
-            });
     }
 
     const goLogoutPage = () => {
