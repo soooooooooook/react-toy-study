@@ -8,6 +8,7 @@ import * as authApi from "../service/auth"
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +18,7 @@ const Login = (props) => {
         authApi.login(email, password)
             .then(response => {
                 const result = response.data;
-                if (result.data === ex401) return;
+                if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
                     const info = jwtDecode(result.data.accessToken);
                     dispatch(
@@ -51,6 +52,9 @@ const Login = (props) => {
                            value={password}
                            className="input_form"
                            onChange={(e) => setPassword(e.target.value)}/>
+                    {
+                        error ? <p className="error_message">아이디와 비밀번호를 확인하세요.</p> : null
+                    }
                     <button type="submit"
                             className="login_button">login
                     </button>
