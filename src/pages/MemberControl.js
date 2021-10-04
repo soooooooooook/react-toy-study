@@ -1,29 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
-import axios from "axios";
-import baseUrl from "../enum/url";
 import Users from "./Users";
 import {logout} from "../features/userSlice";
 import PageNation from "./PageNation"
+import {getUserListApi, deleteMemberApi, editMemberApi, changeNameApi, changeAuthApi} from "../service/service";
 import "../styles/member.css";
 
 const MemberControl = (props) => {
+    const [users, setUsers] = useState(null);
+
     useEffect(() => {
         if (!users) {
             setUsers([]);
             getUserList(0);
         }
-    });
-
+    }, [users]);
     const dispatch = useDispatch();
-    const [users, setUsers] = useState(null);
     const {user} = useSelector(state => state.user);
     const [selectedMemberInfo, setMemberInfo] = useState(null);
-    const saveToken = localStorage.getItem('token');
-    const tokenToObject = JSON.parse(saveToken);
-    const headers = {headers: {'Authorization': `Bearer ${tokenToObject.accessToken}`}}
-    const [page, setPages] = useState(0);
+    const [totalPage, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
     if (!user?.loggedIn) {
@@ -31,25 +27,24 @@ const MemberControl = (props) => {
     }
 
     const getUserList = (page) => {
-        axios.get(baseUrl + `member/all?page=${page}&size=10`, headers)
+        getUserListApi(page)
             .then(response => {
-                setPages(response.data.data.totalPages);
-                return setUsers(response.data.data.content);
+                setTotalPages(response.data.data.totalPages);
+                setUsers(response.data.data.content);
             })
             .catch(reason => console.log(reason));
     }
 
-    const deleteMember = (data) => {
-        const email = data;
-        axios.delete(baseUrl + 'member/' + email, headers)
-            .then(response => {
+    const deleteMember = (email) => {
+        deleteMemberApi(email)
+            .then(() => {
                 getUserList();
             })
             .catch(reason => console.log(reason));
     }
 
-    const editMember = (data) => {
-        axios.get(baseUrl + 'member/?email=' + data, headers)
+    const editMember = (email) => {
+        editMemberApi(email)
             .then(response => {
                 return setMemberInfo(response.data.data);
             })
@@ -57,27 +52,20 @@ const MemberControl = (props) => {
     }
 
     const changeName = () => {
-        const data = {name: selectedMemberInfo.name, email: selectedMemberInfo.email}
-        axios.put(baseUrl + 'member/', data, headers)
-            .then(response => {
-                getUserList();
-            })
-            .catch(reason => console.log(reason))
-        setMemberInfo(null);
+            return changeNameApi(selectedMemberInfo.name, selectedMemberInfo.email)
     }
 
     const changeAuth = () => {
-        const data = {authority: selectedMemberInfo.authority, email: selectedMemberInfo.email};
-        axios.put(baseUrl + 'member/auth', data, headers)
-            .then(response => {
-                getUserList();
-            })
-            .catch(reason => console.log(reason))
+        return changeAuthApi(selectedMemberInfo.authority, selectedMemberInfo.email)
     }
 
     const changeInfo = () => {
-        changeName();
-        changeAuth();
+        Promise.all([changeName(), changeAuth()])
+            .then(() => {
+                getUserList(currentPage)
+            })
+            .catch(reason => console.log(reason))
+        setMemberInfo(null);
     }
 
     const infoName = (name) => {
@@ -105,8 +93,8 @@ const MemberControl = (props) => {
     }
 
     const firstLastPageMove = (value) => {
-        if(value === 0) getUserList(0)
-        else getUserList(page - 1)
+        if (value === 0) getUserList(0)
+        else getUserList(totalPage - 1)
     }
 
     if (!users) return '<div>로딩중</div>';
@@ -154,10 +142,10 @@ const MemberControl = (props) => {
                                    editMember={editMember}/>
                         ))}
                     </div>
-                    <PageNation page={page}
+                    <PageNation page={totalPage}
                                 pageActions={pageActions}
                                 currentPage={currentPage}
-                                firstLastPageMove={firstLastPageMove}></PageNation>
+                                firstLastPageMove={firstLastPageMove}/>
                 </div>
             </div>
         </div>
