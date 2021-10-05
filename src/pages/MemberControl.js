@@ -26,8 +26,8 @@ const MemberControl = (props) => {
         return <Redirect to="/"/>;
     }
 
-    const getUserList = (page) => {
-        getUserListApi(page)
+    const getUserList = () => {
+        getUserListApi(currentPage)
             .then(response => {
                 setTotalPages(response.data.data.totalPages);
                 setUsers(response.data.data.content);
@@ -52,7 +52,7 @@ const MemberControl = (props) => {
     }
 
     const changeName = () => {
-            return changeNameApi(selectedMemberInfo.name, selectedMemberInfo.email)
+        return changeNameApi(selectedMemberInfo.name, selectedMemberInfo.email)
     }
 
     const changeAuth = () => {

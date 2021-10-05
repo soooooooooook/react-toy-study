@@ -19,9 +19,9 @@ const App = () => {
     return (
         <div>
             {/*<Route exact path="/" component={ Home }></Route>*/}
-            <Route exact path="/" component={ Login }></Route>
-            <Route path="/signup" component={ SignUp }></Route>
-            <Route path="/member" component={ MemberControl }></Route>
+            <Route exact path="/" component={Login}/>
+            <Route path="/signup" component={SignUp}/>
+            <Route path="/member" component={MemberControl}/>
         </div>
     );
 }
