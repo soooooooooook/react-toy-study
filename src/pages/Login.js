@@ -21,13 +21,13 @@ const Login = (props) => {
                 if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
                     const info = jwtDecode(result.data.accessToken);
+                    localStorage.setItem('token', JSON.stringify({...result.data, ...info}));
                     dispatch(
                         login({
                             token: result.data.accessToken,
                             loggedIn: true,
                         })
                     );
-                    localStorage.setItem('token', JSON.stringify({...result.data, ...info}));
                     props.history.push('/member');
                 }
             })

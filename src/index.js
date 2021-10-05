@@ -5,7 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { Provider } from "react-redux";
 import store from "./app/store";
+import {interceptors} from "./service/http";
 
+interceptors(store);
 ReactDOM.render(
     <Provider store={store}>
         <Root />
