@@ -26,6 +26,7 @@ const Login = (props) => {
                         login({
                             token: result.data.accessToken,
                             loggedIn: true,
+                            auth: checkAuth()
                         })
                     );
                     props.history.push('/member');
@@ -33,6 +34,11 @@ const Login = (props) => {
             })
     }
 
+    const checkAuth = () => {
+        const saveToken = localStorage.getItem('token');
+        const tokenToObject = JSON.parse(saveToken);
+        return tokenToObject.auth;
+    }
     const goLogoutPage = () => {
         props.history.push('/signup');
     }

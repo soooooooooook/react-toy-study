@@ -135,9 +135,10 @@ const MemberControl = (props) => {
                         <div>Authority</div>
                     </div>
                     <div className="page-list-wrapper">
-                        {users.map(user => (
-                            <Users user={user}
-                                   key={user.seq}
+                        {users.map(member => (
+                            <Users user={member}
+                                   key={member.seq}
+                                   auth={user.auth}
                                    deleteMember={deleteMember}
                                    editMember={editMember}/>
                         ))}
