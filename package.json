@@ -20,7 +20,7 @@
     "jwt-decode": "^3.1.2"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
+    "start": "set PORT=9000 && cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
