@@ -6,6 +6,9 @@ import {logout} from "../features/userSlice";
 import PageNation from "./PageNation"
 import {getUserListApi, deleteMemberApi, editMemberApi, changeNameApi, changeAuthApi} from "../service/service";
 import "../styles/member.css";
+import jwtDecode from "jwt-decode";
+import _ from "lodash";
+
 
 const MemberControl = (props) => {
     const [users, setUsers] = useState(null);
@@ -88,9 +91,13 @@ const MemberControl = (props) => {
     }
 
     const pageActions = (i) => {
-        getUserList(i);
+        deb_page(i);
         setCurrentPage(i);
     }
+
+    const deb_page = _.debounce((i) => {
+        getUserList(i);
+    }, 3000)
 
     const firstLastPageMove = (value) => {
         if (value === 0) getUserList(0)

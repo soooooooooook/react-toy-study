@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "cross-env": "^7.0.3",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -16,8 +18,7 @@
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
-    "web-vitals": "^1.1.2",
-    "jwt-decode": "^3.1.2"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "set PORT=9000 && cross-env NODE_PATH=src react-scripts start",
