@@ -58,3 +58,7 @@ select:focus-visible {
   -webkit-appearance:none;
 }
 
+.cp {
+  cursor: pointer;
+}
+

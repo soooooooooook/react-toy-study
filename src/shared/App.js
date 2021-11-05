@@ -1,5 +1,5 @@
 import React from 'react';
-import {Login, MemberControl, SignUp} from '../pages'
+import {Login, MemberList, SignUp, User} from '../pages'
 import {Route} from "react-router-dom";
 import {login} from "../features/userSlice";
 import {useDispatch} from "react-redux";
@@ -18,10 +18,11 @@ const App = () => {
 
     return (
         <div>
-            {/*<Route exact path="/" component={ Home }></Route>*/}
             <Route exact path="/" component={Login}/>
+            {/*<Route exact path="/home" component={ Home }></Route>*/}
             <Route path="/signup" component={SignUp}/>
-            <Route path="/member" component={MemberControl}/>
+            <Route path="/member" component={MemberList}/>
+            <Route path="/user" component={User}/>
         </div>
     );
 }

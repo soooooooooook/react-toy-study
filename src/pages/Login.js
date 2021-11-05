@@ -29,6 +29,7 @@ const Login = (props) => {
                         })
                     );
                     props.history.push('/member');
+
                 }
             })
     }

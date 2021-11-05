@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Users from "./Users";
+import Header from "./Header";
 import {logout} from "../features/userSlice";
 import PageNation from "./PageNation"
-import {getUserListApi, deleteMemberApi, editMemberApi, changeNameApi, changeAuthApi} from "../service/service";
+import {getUserListApi, changeNameApi, changeAuthApi} from "../service/service";
 import "../styles/member.css";
 
-const MemberControl = (props) => {
+const MemberList = (props) => {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
@@ -33,22 +34,6 @@ const MemberControl = (props) => {
                 setUsers(response.data.data.content);
             })
             .catch(reason => console.log(reason));
-    }
-
-    const deleteMember = (email) => {
-        deleteMemberApi(email)
-            .then(() => {
-                getUserList();
-            })
-            .catch(reason => console.log(reason));
-    }
-
-    const editMember = (email) => {
-        editMemberApi(email)
-            .then(response => {
-                return setMemberInfo(response.data.data);
-            })
-            .catch(reason => console.log(reason))
     }
 
     const changeName = () => {
@@ -97,13 +82,16 @@ const MemberControl = (props) => {
         else getUserList(totalPage - 1)
     }
 
+    const moveUserPage = (personInfo) => {
+        props.history.push('/User', personInfo);
+    }
+
     if (!users) return '<div>로딩중</div>';
     return (
         <div>
-            <div className="header-wrapper">
-                <h1>Member</h1>
-                <button className="logout_button" onClick={onClickLogout}>Logout</button>
-            </div>
+            <Header
+                logout={onClickLogout}
+            ></Header>
             <div className="body-layout">
                 <div className="body-wrapper">
                     {
@@ -138,8 +126,8 @@ const MemberControl = (props) => {
                         {users.map(user => (
                             <Users user={user}
                                    key={user.seq}
-                                   deleteMember={deleteMember}
-                                   editMember={editMember}/>
+                                   editUser={moveUserPage}
+                            />
                         ))}
                     </div>
                     <PageNation page={totalPage}
@@ -152,4 +140,4 @@ const MemberControl = (props) => {
     )
 }
 
-export default MemberControl;
+export default MemberList;
