@@ -73,9 +73,13 @@ const MemberList = (props) => {
     }
 
     const pageActions = (i) => {
-        getUserList(i);
+        deb_page(i);
         setCurrentPage(i);
     }
+
+    const deb_page = _.debounce((i) => {
+        getUserList(i);
+    }, 3000)
 
     const firstLastPageMove = (value) => {
         if (value === 0) getUserList(0)

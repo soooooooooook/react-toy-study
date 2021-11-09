@@ -51,18 +51,20 @@
     display: flex;
     align-items: center;
     height: 70px;
+    min-width: 600px;
     font-weight: 700;
     padding: 0 20px;
     background-color: #eee;
     /*border-bottom: 1px solid #aaa;*/
 }
 .table-header div {
-    width: 250px;
-    max-width: 250px;
+    width: 33.333%;
+    /*max-width: 250px;*/
 }
 
 .page-list-wrapper {
     margin-bottom: 40px;
+    min-width: 600px;
 }
 .user-list {
     display: flex;
@@ -73,14 +75,33 @@
     /*margin-bottom: 40px;*/
 }
 
+.user-list:hover {
+    background-color: rgba(230, 244, 255, 0.5);
+}
+
 .user-list span {
     display: inline-block;
-    width: 250px;
+    width: 33.33333%;
 }
 
 .user-list .seq {
     width: 100px;
     font-weight: 500;
+}
+
+.user-info li{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info li:last-child {
+    margin-bottom: 50px;
+}
+
+.user-info li .label {
+    min-width: 100px;
 }
 
 .edit_button {
