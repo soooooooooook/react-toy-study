@@ -35,7 +35,7 @@ const User = (props) => {
         <div>
             <Header
                 logout={onClickLogout}
-            ></Header>
+            />
             <div className="body-layout">
                 <div className="body-wrapper">
                 <ul className="user-info">

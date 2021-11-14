@@ -25,3 +25,23 @@ export function changeAuthApi(authority, email) {
         email
     })
 }
+
+export function refreshAuthApi(token) {
+    return http.post('auth/check', token)
+}
+
+export function getBoardListApi(page) {
+    return http.get(`board/all?page=${page}&size=10`)
+}
+
+export function getBoardItemApi(id) {
+    return http.get(`board/${id}`)
+}
+
+export function saveReplyApi(data) {
+    return http.post('board/reply', data)
+}
+
+export function deleteReplyApi(id) {
+    return http.delete(`board/reply/${id}`)
+}

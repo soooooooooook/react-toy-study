@@ -7,6 +7,7 @@ import {logout} from "../features/userSlice";
 import PageNation from "./PageNation"
 import {getUserListApi, changeNameApi, changeAuthApi} from "../service/service";
 import "../styles/member.css";
+import _ from "lodash";
 
 const MemberList = (props) => {
     const [users, setUsers] = useState(null);
@@ -30,8 +31,8 @@ const MemberList = (props) => {
     const getUserList = () => {
         getUserListApi(currentPage)
             .then(response => {
-                setTotalPages(response.data.data.totalPages);
-                setUsers(response.data.data.content);
+                setTotalPages(response.data.data.totalSize);
+                setUsers(response.data.data.list);
             })
             .catch(reason => console.log(reason));
     }
@@ -87,7 +88,11 @@ const MemberList = (props) => {
     }
 
     const moveUserPage = (personInfo) => {
-        props.history.push('/User', personInfo);
+        props.history.push('/user', personInfo);
+    }
+
+    const moveBoardPage = () => {
+        props.history.push('/board');
     }
 
     if (!users) return '<div>로딩중</div>';
@@ -95,7 +100,8 @@ const MemberList = (props) => {
         <div>
             <Header
                 logout={onClickLogout}
-            ></Header>
+                moveBoardPage={moveBoardPage}
+            />
             <div className="body-layout">
                 <div className="body-wrapper">
                     {

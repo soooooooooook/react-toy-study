@@ -1,6 +1,7 @@
 import React from "react";
 
 function PageNation(props) {
+
     const pageActionsEvent = (value) => {
         props.pageActions(value)
     }
@@ -16,7 +17,7 @@ function PageNation(props) {
                 Array(props.page).fill(null).map((v, i) =>
                     <div key={i}
                          onClick={() => pageActionsEvent(i)}
-                         className={props.currentPage === i ? 'active' : null}>{ i + 1 }</div>
+                         className={props.currentPage === i ? 'active' : null}>{i + 1}</div>
                 )
             }
             <div onClick={() => firstLastPageMoveEvent(1)}>&#187;</div>
