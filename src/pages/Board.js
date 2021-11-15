@@ -4,7 +4,7 @@ import {getBoardListApi} from "../service/service"
 import Header from "./Header";
 import BoardItems from "./BoardItems";
 import {logout} from "../features/userSlice";
-
+import board from "../styles/board.css"
 
 const Board = (props) => {
     const [contentList, setContentList] = useState(null);
@@ -44,16 +44,19 @@ const Board = (props) => {
             />
             <div className="body-layout">
                 <div className="body-wrapper">
-                    {contentList.map(item => (
-                        <BoardItems
-                            key={item["seq"]}
-                            id={item["seq"]}
-                            title={item["title"]}
-                            count={item["viewCount"]}
-                            email={item["memberEmail"]}
-                            boardItem={getBoardItem}
-                        />
-                    ))}
+                    <button>글쓰기</button>
+                    <div className="board-list-wrapper">
+                        {contentList.map(item => (
+                            <BoardItems
+                                key={item["seq"]}
+                                id={item["seq"]}
+                                title={item["title"]}
+                                count={item["viewCount"]}
+                                email={item["memberEmail"]}
+                                boardItem={getBoardItem}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

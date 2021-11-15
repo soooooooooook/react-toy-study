@@ -18,6 +18,7 @@ const Login = (props) => {
         authApi.login(email, password)
             .then(response => {
                 const result = response.data;
+                console.log(result);
                 if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
                     const info = jwtDecode(result.data.accessToken);

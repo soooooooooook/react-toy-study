@@ -8,11 +8,14 @@ const SignUp = (props) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [city, setCity] = useState("");
+    const [street, setStreet] = useState("");
+    const [zipcode, setZipcode] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        let data = {name: name, email: email, password: password};
+        let data = {name: name, email: email, password: password, city: city, street: street, zipcode: zipcode};
 
         axios.post(baseUrl + 'auth/signup', data)
             .then(response => {
@@ -43,6 +46,21 @@ const SignUp = (props) => {
                            value={password}
                            className="input_form"
                            onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="text"
+                           placeholder="city"
+                           value={city}
+                           className="input_form"
+                           onChange={(e) => setCity(e.target.value)}/>
+                    <input type="text"
+                           placeholder="street"
+                           value={street}
+                           className="input_form"
+                           onChange={(e) => setStreet(e.target.value)}/>
+                    <input type="text"
+                           placeholder="zipcode"
+                           value={zipcode}
+                           className="input_form"
+                           onChange={(e) => setZipcode(e.target.value)}/>
                     <button type="submit"
                             className="login_button">sign up</button>
                 </form>

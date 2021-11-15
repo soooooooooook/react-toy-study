@@ -1,4 +1,5 @@
 import React from "react";
+import board from "../styles/board.css"
 
 const BoardItems = (props) => {
     console.log(props);
@@ -6,7 +7,7 @@ const BoardItems = (props) => {
         props.boardItem(props.id);
     };
     return (
-        <div onClick={boardItemEvent}>
+        <div className="board-list-item" onClick={boardItemEvent}>
             <div>{props.id}</div>
             <div>{props.title}</div>
             <div>{props.count}</div>

@@ -5,3 +5,4 @@ export { default as MemberList } from './MemberList';
 export { default as User } from './User';
 export { default as Board } from './Board';
 export { default as BoardItem } from './BoardItem';
+export { default as CreateBoard } from './CreateBoard';

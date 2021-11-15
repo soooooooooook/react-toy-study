@@ -45,3 +45,7 @@ export function saveReplyApi(data) {
 export function deleteReplyApi(id) {
     return http.delete(`board/reply/${id}`)
 }
+
+export function createBoardApi(data) {
+    return http.post('board/', data)
+}
