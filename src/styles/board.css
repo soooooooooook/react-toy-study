@@ -67,4 +67,29 @@
 .board-list-item {
     display: flex;
     align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.board-list-item:hover {
+    background-color: rgba(221, 221, 221, 0.5);
+}
+
+.board-list-item .list-number {
+    width: 50px;
+}
+
+.board-list-item .list-title {
+    width: calc(100% - 100px);
+    font-weight: 500;
+}
+
+.board-list-item .list-count {
+    width: 50px;
+}
+
+.write-button {
+    margin-bottom: 50px;
 }

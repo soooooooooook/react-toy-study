@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {createBoardApi} from "../service/service";
 
-const CreateBoard = () => {
+const CreateBoard = (props) => {
     const [title, setTitle] = useState(null);
     const [content, setContent] = useState(null);
 
@@ -16,6 +16,7 @@ const CreateBoard = () => {
         createBoardApi(data)
             .then(response => {
                 console.log(response.data);
+                props.history.push(`board/`);
             })
             .catch(reason => {
                 console.log(reason);

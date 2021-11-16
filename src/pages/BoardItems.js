@@ -8,10 +8,9 @@ const BoardItems = (props) => {
     };
     return (
         <div className="board-list-item" onClick={boardItemEvent}>
-            <div>{props.id}</div>
-            <div>{props.title}</div>
-            <div>{props.count}</div>
-            <div>{props.email}</div>
+            <div className="list-number">{props.id}</div>
+            <div className="list-title">{props.title}</div>
+            <div className="list-count">{props.count}</div>
         </div>
     )
 }

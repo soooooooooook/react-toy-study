@@ -6,3 +6,4 @@ export { default as User } from './User';
 export { default as Board } from './Board';
 export { default as BoardItem } from './BoardItem';
 export { default as CreateBoard } from './CreateBoard';
+export { default as MainPage } from './MainPage';

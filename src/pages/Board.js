@@ -7,20 +7,25 @@ import {logout} from "../features/userSlice";
 import board from "../styles/board.css"
 
 const Board = (props) => {
+
     const [contentList, setContentList] = useState(null);
+
     useEffect(() => {
         if (contentList === null) {
             getBoardList();
         }
         console.table(contentList);
     });
+
     const dispatch = useDispatch();
+
     const onClickLogout = () => {
         dispatch(
             logout()
         );
         props.history.push('/');
     }
+
     const getBoardList = () => {
         getBoardListApi(0)
             .then(response => {
@@ -36,6 +41,11 @@ const Board = (props) => {
     const getBoardItem = (id) => {
         props.history.push('/board-detail/' + id);
     }
+
+    const moveBoardCreatePage = () => {
+        props.history.push('/board-create');
+    }
+
     if (contentList === null) return ""
     return (
         <div>
@@ -44,7 +54,7 @@ const Board = (props) => {
             />
             <div className="body-layout">
                 <div className="body-wrapper">
-                    <button>글쓰기</button>
+                    <button className="write-button" onClick={moveBoardCreatePage}>글쓰기</button>
                     <div className="board-list-wrapper">
                         {contentList.map(item => (
                             <BoardItems

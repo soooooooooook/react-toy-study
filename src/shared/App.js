@@ -1,5 +1,5 @@
 import React from 'react';
-import {Login, MemberList, SignUp, User, Board, BoardItem, CreateBoard} from '../pages'
+import {Login, MemberList, SignUp, User, Board, BoardItem, CreateBoard, MainPage} from '../pages'
 import {Route} from "react-router-dom";
 import {login} from "../features/userSlice";
 import {useDispatch} from "react-redux";
@@ -25,6 +25,7 @@ const App = () => {
             <Route path="/board" component={Board}/>
             <Route path="/board-detail/:id" component={BoardItem}/>
             <Route path="/board-create" component={CreateBoard}/>
+            <Route path="/main" component={MainPage}/>
         </div>
     );
 }

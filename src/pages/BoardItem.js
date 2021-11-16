@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {logout} from "../features/userSlice";
 import {deleteReplyApi, getBoardItemApi, saveReplyApi} from "../service/service";
 import {useParams} from "react-router-dom";
-import board from "../styles/board.css"
+import board from "../styles/board.css";
 
 const BoardItem = (props) => {
     console.log('프롭', props)
