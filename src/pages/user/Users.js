@@ -2,7 +2,7 @@ import React from "react";
 
 function Users(props) {
     const userEditPageMoveEvent = () => {
-        props.editUser({email: props.user.email, name: props.user.name, authority: props.user.authority})
+        props.editUser({email: props.user.email, name: props.user.name, authority: props.user.authority, address: props.user.address})
     }
     return (
         <div className="user-list cp" onClick={userEditPageMoveEvent}>

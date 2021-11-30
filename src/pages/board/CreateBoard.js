@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {createBoardApi} from "../service/service";
+import {createBoardApi} from "../../service/service";
 
 const CreateBoard = (props) => {
     const [title, setTitle] = useState(null);

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import "../styles/login.css"
+import "../../styles/login.css"
 import {useDispatch} from 'react-redux';
-import {login} from '../features/userSlice';
+import {login} from '../../features/userSlice';
 import jwtDecode from "jwt-decode";
-import * as authApi from "../service/auth"
+import * as authApi from "../../service/auth"
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -18,7 +18,6 @@ const Login = (props) => {
         authApi.login(email, password)
             .then(response => {
                 const result = response.data;
-                console.log(result);
                 if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
                     const info = jwtDecode(result.data.accessToken);

@@ -1,20 +1,8 @@
 import React, {useState} from "react";
-import Header from "./Header";
-import {useDispatch, useSelector} from "react-redux";
-import {deleteMemberApi, editMemberApi} from "../service/service";
-import {logout} from "../features/userSlice";
+import {deleteMemberApi} from "../../service/service";
 
 const User = (props) => {
-    const dispatch = useDispatch();
     const [selectedUserInfo, setSelectedUser] = useState(props.history.location.state);
-
-    const onClickLogout = () => {
-        dispatch(
-            logout()
-        );
-        props.history.push('/');
-    }
-
     const deleteMember = () => {
         deleteMemberApi(selectedUserInfo.email)
             .then(() => {
@@ -23,6 +11,8 @@ const User = (props) => {
             .catch(reason => console.log(reason));
     }
 
+    let token =  localStorage.getItem('token');
+    const auth = JSON.parse(token).auth;
     // const editMember = (email) => {
     //     editMemberApi(email)
     //         .then(response => {
@@ -32,12 +22,8 @@ const User = (props) => {
     // }
 
     return (
-        <div>
-            <Header
-                logout={onClickLogout}
-            />
-            <div className="body-layout">
-                <div className="body-wrapper">
+        <div className="body-layout">
+            <div className="body-wrapper">
                 <ul className="user-info">
                     <li>
                         <div className="label"><strong>Name</strong></div>
@@ -51,6 +37,15 @@ const User = (props) => {
                             {selectedUserInfo.email}
                         </div>
                     </li>
+                    { auth !== "ROLE_USER" ?
+                        <li>
+                            <div className="label"><strong>Address</strong></div>
+                            <div>
+                                {selectedUserInfo.address.city},{selectedUserInfo.address.street},{selectedUserInfo.address.zipcode}
+                            </div>
+                        </li>
+                        : ''
+                    }
                     <li>
                         <div className="label"><strong>Authority</strong></div>
                         <div>
@@ -58,12 +53,14 @@ const User = (props) => {
                         </div>
                     </li>
                 </ul>
-                <div>
-                    {/*<button className="edit_button" onClick={editMember}>Edit</button>*/}
-                    <button className="edit_button">Edit</button>
-                    <button className="edit_button del" onClick={deleteMember}>Delete</button>
-                </div>
-            </div>
+                { auth !== "ROLE_USER" ?
+                    <div>
+                        {/*<button className="edit_button" onClick={editMember}>Edit</button>*/}
+                        <button className="edit_button">Edit</button>
+                        <button className="edit_button del" onClick={deleteMember}>Delete</button>
+                    </div>
+                    : ''
+                }
             </div>
         </div>
     )

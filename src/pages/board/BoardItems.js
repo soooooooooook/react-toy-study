@@ -1,8 +1,7 @@
 import React from "react";
-import board from "../styles/board.css"
+import "../../styles/board.css"
 
 const BoardItems = (props) => {
-    console.log(props);
     const boardItemEvent = () => {
         props.boardItem(props.id);
     };

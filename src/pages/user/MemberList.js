@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Users from "./Users";
-import Header from "./Header";
-import {logout} from "../features/userSlice";
-import PageNation from "./PageNation"
-import {getUserListApi, changeNameApi, changeAuthApi} from "../service/service";
-import "../styles/member.css";
+import PageNation from "../compnent/PageNation"
+import {getUserListApi, changeNameApi, changeAuthApi} from "../../service/service";
+import "../../styles/member.css";
 import _ from "lodash";
 
 const MemberList = (props) => {
@@ -18,7 +16,6 @@ const MemberList = (props) => {
             getUserList(0);
         }
     }, [users]);
-    const dispatch = useDispatch();
     const {user} = useSelector(state => state.user);
     const [selectedMemberInfo, setMemberInfo] = useState(null);
     const [totalPage, setTotalPages] = useState(0);
@@ -65,14 +62,6 @@ const MemberList = (props) => {
         member.authority = auth;
         setMemberInfo(member);
     }
-
-    const onClickLogout = () => {
-        dispatch(
-            logout()
-        );
-        props.history.push('/');
-    }
-
     const pageActions = (i) => {
         deb_page(i);
         setCurrentPage(i);
@@ -90,18 +79,9 @@ const MemberList = (props) => {
     const moveUserPage = (personInfo) => {
         props.history.push('/user', personInfo);
     }
-
-    const moveBoardPage = () => {
-        props.history.push('/board');
-    }
-
     if (!users) return '<div>로딩중</div>';
     return (
         <div>
-            <Header
-                logout={onClickLogout}
-                moveBoardPage={moveBoardPage}
-            />
             <div className="body-layout">
                 <div className="body-wrapper">
                     {

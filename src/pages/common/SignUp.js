@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
-import baseUrl from "../enum/url";
-import "../styles/login.css"
+import baseUrl from "../../enum/url";
+import "../../styles/login.css"
 // import {useHistory} from "react-router-dom";
 
 const SignUp = (props) => {

@@ -57,10 +57,10 @@
     background-color: #eee;
     /*border-bottom: 1px solid #aaa;*/
 }
-.table-header div {
-    width: 33.333%;
-    /*max-width: 250px;*/
-}
+/*.table-header div {*/
+/*    width: 33.333%;*/
+/*    !*max-width: 250px;*!*/
+/*}*/
 
 .page-list-wrapper {
     margin-bottom: 40px;
