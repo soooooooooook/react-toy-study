@@ -8,15 +8,8 @@ export function deleteMemberApi(email) {
     return http.delete(`member/${email}`)
 }
 
-export function editMemberApi(email) {
-    return http.get(`member/?email=${email}`);
-}
-
-export function changeNameApi(name, email) {
-    return http.put('member/', {
-        name,
-        email
-    })
+export function editMemberApi(data) {
+    return http.put('member/', data);
 }
 
 export function changeAuthApi(authority, email) {
@@ -48,4 +41,12 @@ export function deleteReplyApi(id) {
 
 export function createBoardApi(data) {
     return http.post('board/', data)
+}
+
+export function editBoardApi(data) {
+    return http.put('board/', data)
+}
+
+export function delBoardApi(id) {
+    return http.delete(`board/${id}`)
 }

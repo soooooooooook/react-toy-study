@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Users from "./Users";
 import PageNation from "../compnent/PageNation"
-import {getUserListApi, changeNameApi, changeAuthApi} from "../../service/service";
+import {getUserListApi} from "../../service/service";
 import "../../styles/member.css";
 import _ from "lodash";
 
@@ -17,7 +17,7 @@ const MemberList = (props) => {
         }
     }, [users]);
     const {user} = useSelector(state => state.user);
-    const [selectedMemberInfo, setMemberInfo] = useState(null);
+    // const [selectedMemberInfo, setMemberInfo] = useState(null);
     const [totalPage, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -34,34 +34,17 @@ const MemberList = (props) => {
             .catch(reason => console.log(reason));
     }
 
-    const changeName = () => {
-        return changeNameApi(selectedMemberInfo.name, selectedMemberInfo.email)
-    }
-
-    const changeAuth = () => {
-        return changeAuthApi(selectedMemberInfo.authority, selectedMemberInfo.email)
-    }
-
-    const changeInfo = () => {
-        Promise.all([changeName(), changeAuth()])
-            .then(() => {
-                getUserList(currentPage)
-            })
-            .catch(reason => console.log(reason))
-        setMemberInfo(null);
-    }
-
-    const infoName = (name) => {
-        const member = {...selectedMemberInfo};
-        member.name = name;
-        setMemberInfo(member);
-    }
-
-    const infoAuth = (auth) => {
-        const member = {...selectedMemberInfo};
-        member.authority = auth;
-        setMemberInfo(member);
-    }
+    // const infoName = (name) => {
+    //     const member = {...selectedMemberInfo};
+    //     member.name = name;
+    //     setMemberInfo(member);
+    // }
+    //
+    // const infoAuth = (auth) => {
+    //     const member = {...selectedMemberInfo};
+    //     member.authority = auth;
+    //     setMemberInfo(member);
+    // }
     const pageActions = (i) => {
         deb_page(i);
         setCurrentPage(i);
@@ -84,29 +67,6 @@ const MemberList = (props) => {
         <div>
             <div className="body-layout">
                 <div className="body-wrapper">
-                    {
-                        selectedMemberInfo ?
-                            <div className="editMember-wrapper">
-                                <ul>
-                                    <li>
-                                        <strong>Name :</strong>
-                                        <input className="edit_form" type="name" value={selectedMemberInfo.name || ''}
-                                               onChange={(e) => infoName(e.target.value)}/>
-                                    </li>
-                                    <li>
-                                        <strong>Email :</strong>{selectedMemberInfo.email}
-                                    </li>
-                                    <li>
-                                        <strong>Authority :</strong>
-                                        <select className="edit_form" onChange={(e) => infoAuth(e.target.value)}>
-                                            <option value="ROLE_USER">USER</option>
-                                            <option value="ROLE_ADMIN">ADMIN</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                                <button className="done_button" onClick={changeInfo}>완료</button>
-                            </div> : ''
-                    }
                     <div className="table-header">
                         <div>Name</div>
                         <div>Email</div>

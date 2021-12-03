@@ -12,6 +12,7 @@ const CreateBoard = (props) => {
             content: content,
             title: title
         }
+        console.log(data);
 
         createBoardApi(data)
             .then(response => {

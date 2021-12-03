@@ -61,4 +61,8 @@ select:focus-visible {
 .cp {
   cursor: pointer;
 }
+.textarea {
+  width: 600px;
+  height: 300px;
+}
 

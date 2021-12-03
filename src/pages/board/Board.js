@@ -41,21 +41,15 @@ const Board = (props) => {
         props.history.push('/create');
     }
 
-    const tableWidth = {
-        a:'width: 10%',
-        b:'width: 80%',
-        c:'width: 10%',
-    }
-
     if (contentList === null) return ""
     return (
         <div className="body-layout">
             <div className="body-wrapper">
                 <button className="write-button" onClick={moveBoardCreatePage}>글쓰기</button>
                 <div className="table-header">
-                    <div style={tableWidth.a}>no</div>
-                    <div style={tableWidth.b}>title</div>
-                    <div style={tableWidth.c}>count</div>
+                    <div>no</div>
+                    <div>title</div>
+                    <div>count</div>
                 </div>
                 <div className="board-list-wrapper">
                     {contentList.map(item => (
