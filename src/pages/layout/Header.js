@@ -13,13 +13,14 @@ const Header = (props) => {
         );
     }
     if (!user) return '';
-
     return (
         <div className="header-wrapper">
-            <h1>Toy Project</h1>
-            <Link to="/board">board</Link>
-            <Link to="/member">member</Link>
-            <button className="logout_button" onClick={logoutEvent}>Logout</button>
+            <h1 className="logo">Toy Project</h1>
+            <div className="ml-auto d-flex button-wrapper">
+                <Link to="/board" className="menu button line dark">Board</Link>
+                <Link to="/member" className="menu button line dark">Member</Link>
+                <button className="button dark" onClick={logoutEvent}><span>{JSON.parse(localStorage.getItem('token')).sub}</span><span className="ver-line white"/>Logout</button>
+            </div>
         </div>
     )
 }

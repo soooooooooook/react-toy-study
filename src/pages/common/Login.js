@@ -20,6 +20,7 @@ const Login = (props) => {
                 const result = response.data;
                 if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
+                    console.log('데이터를 알려줘',result.data);
                     const info = jwtDecode(result.data.accessToken);
                     localStorage.setItem('token', JSON.stringify({...result.data, ...info}));
                     dispatch(
@@ -28,7 +29,7 @@ const Login = (props) => {
                             loggedIn: true,
                         })
                     );
-                    props.history.push('/member');
+                    props.history.push('/board');
 
                 }
             })

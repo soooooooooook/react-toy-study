@@ -2,17 +2,19 @@ import React from "react";
 import "../../styles/board.css"
 
 const BoardItems = (props) => {
+    console.log(props)
 
     const boardItemEvent = () => {
-        props.boardItem(props.id);
+        props.boardItem(props.id, props.email);
     };
 
     return (
-        <div className="board-list-item" onClick={boardItemEvent}>
-            <div className="list-number">{props.id}</div>
-            <div className="list-title">{props.title}</div>
-            <div className="list-count">{props.count}</div>
-        </div>
+        <tr onClick={boardItemEvent}>
+            <td className="text-center">{props.id}</td>
+            <td>{props.title}</td>
+            <td className="text-center">{props.email}</td>
+            <td className="text-center">{props.count}</td>
+        </tr>
     )
 }
 

@@ -1,11 +1,20 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+::-webkit-scrollbar { width: 5px; } /* 스크롤 바 */
+
+::-webkit-scrollbar-track { background-color:#fff; } /* 스크롤 바 밑의 배경 */
+
+::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; } /* 실질적 스크롤 바 */
+
+::-webkit-scrollbar-thumb:hover { background: #ccc; } /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+::-webkit-scrollbar-thumb:active { background: #eee; } /* 실질적 스크롤 바를 클릭할 때 */
+
+::-webkit-scrollbar-button { display: none; } /* 스크롤 바 상 하단 버튼 */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -16,6 +25,7 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 14px;
 }
 
 input::placeholder {
@@ -27,14 +37,217 @@ li {
   list-style: none;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  /*background-color: #dadadd;*/
+  background-color: #e3ecfb;
+  height: 60px;
+  font-size: 16px;
+  padding: 0 20px;
+}
+
+td {
+  height: 60px;
+  padding: 0 20px;
+  border-bottom: 1px solid #dadadd;
+  font-size: 15px;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background-color: rgba(226, 236, 250, 0.2);
+}
+
+a {
+  text-decoration: none;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 50px;
+  border-bottom: 1px solid #dadadd;
+}
+
+.button-wrapper a {
+  margin-right: 10px;
+}
+
+.logo {
+  font-family: 'Oxanium', cursive;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0 25px;
+  border-radius: 4px;
+  background-color: #349ff6;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button.line {
+  border: 1px solid #349ff6;
+  background-color: white;
+  color: #349ff6;
+}
+
+.button.dark {
+  background-color: #0157cb;
+}
+
+.button.line.dark {
+  border: 1px solid #0157cb;
+  background-color: white;
+  color: #0157cb;
+}
+
+.button.small {
+  height: 30px;
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+.table-container {
+  height: 500px;
+  overflow: auto;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .input_form {
   width: 300px;
   height: 40px;
   padding: 0 15px;
-  margin-bottom: 20px;
-  border-radius: 0;
-  border: 1px solid black;
+  /*margin-bottom: 20px;*/
+  border-radius: 4px;
+  border: 1px solid #ddd;
   /*box-sizing: border-box;*/
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.d-grow {
+  flex-grow: 1;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.ver-line {
+  display: inline-block;
+  width: 1px;
+  height: 10px;
+  margin: 0 10px;
+  background-color: black;
+}
+
+.ver-line.white {
+  background-color: white;
+}
+
+.header-area .title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 90px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.header-area .sub-info {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-area .sub-info > div {
+  margin-right: 20px;
+}
+
+.body-area {
+  line-height: 1.5rem;
+  min-height: 200px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.regist_button {
+  width: 90px;
+  height: 30px;
+}
+
+.reply-wrapper {
+  border-radius: 4px;
+  background-color: #eee;
+  padding: 30px 20px;
+}
+
+.reply-wrapper h4 {
+  font-size: 1.1rem;
+}
+
+.reply-view-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  /*border-bottom: 1px solid #ddd;*/
+}
+
+.reply-view-item div {
+  margin-right: 10px;
+}
+
+.reply-view-item div.del {
+  color: darkgrey;
 }
 
 input:focus-visible,

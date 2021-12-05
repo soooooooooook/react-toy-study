@@ -8,7 +8,6 @@ import PageNation from "../compnent/PageNation";
 
 const Board = (props) => {
     const [contentList, setContentList] = useState(null);
-
     useEffect(() => {
         if (contentList === null) {
             getBoardList();
@@ -33,8 +32,8 @@ const Board = (props) => {
 
     }
 
-    const getBoardItem = (id) => {
-        props.history.push('/detail/' + id);
+    const getBoardItem = (id, email) => {
+        props.history.push('/detail/' + id, email);
     }
 
     const moveBoardCreatePage = () => {
@@ -45,25 +44,34 @@ const Board = (props) => {
     return (
         <div className="body-layout">
             <div className="body-wrapper">
-                <button className="write-button" onClick={moveBoardCreatePage}>글쓰기</button>
-                <div className="table-header">
-                    <div>no</div>
-                    <div>title</div>
-                    <div>count</div>
+                <div className="d-flex">
+                    <button className="button line dark mb-20 ml-auto" onClick={moveBoardCreatePage}>글쓰기</button>
                 </div>
-                <div className="board-list-wrapper">
-                    {contentList.map(item => (
-                        <BoardItems
-                            key={item["seq"]}
-                            id={item["seq"]}
-                            title={item["title"]}
-                            count={item["viewCount"]}
-                            email={item["memberEmail"]}
-                            boardItem={getBoardItem}
-                        />
-                    ))}
+                <div className="table-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th className="fixed-header">No</th>
+                            <th className="fixed-header">Title</th>
+                            <th className="fixed-header">Writer</th>
+                            <th className="fixed-header">Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {contentList.map(item => (
+                            <BoardItems
+                                key={item["seq"]}
+                                id={item["seq"]}
+                                title={item["title"]}
+                                count={item["viewCount"]}
+                                email={item["memberEmail"]}
+                                reply={item["replies"]}
+                                boardItem={getBoardItem}
+                            />
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
-                <PageNation/>
             </div>
         </div>
     )

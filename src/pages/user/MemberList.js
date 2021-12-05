@@ -17,7 +17,6 @@ const MemberList = (props) => {
         }
     }, [users]);
     const {user} = useSelector(state => state.user);
-    // const [selectedMemberInfo, setMemberInfo] = useState(null);
     const [totalPage, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -34,17 +33,6 @@ const MemberList = (props) => {
             .catch(reason => console.log(reason));
     }
 
-    // const infoName = (name) => {
-    //     const member = {...selectedMemberInfo};
-    //     member.name = name;
-    //     setMemberInfo(member);
-    // }
-    //
-    // const infoAuth = (auth) => {
-    //     const member = {...selectedMemberInfo};
-    //     member.authority = auth;
-    //     setMemberInfo(member);
-    // }
     const pageActions = (i) => {
         deb_page(i);
         setCurrentPage(i);
@@ -67,27 +55,31 @@ const MemberList = (props) => {
         <div>
             <div className="body-layout">
                 <div className="body-wrapper">
-                    <div className="table-header">
-                        <div>Name</div>
-                        <div>Email</div>
-                        <div>Authority</div>
-                    </div>
-                    <div className="page-list-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th className="sticky-header">Name</th>
+                            <th className="sticky-header">Email</th>
+                            <th className="sticky-header">Authority</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {users.map(user => (
                             <Users user={user}
                                    key={user.seq}
                                    editUser={moveUserPage}
                             />
                         ))}
-                    </div>
-                    <PageNation page={totalPage}
-                                pageActions={pageActions}
-                                currentPage={currentPage}
-                                firstLastPageMove={firstLastPageMove}/>
+                        </tbody>
+                    </table>
+                    {/*<PageNation page={totalPage}*/}
+                    {/*            pageActions={pageActions}*/}
+                    {/*            currentPage={currentPage}*/}
+                    {/*            firstLastPageMove={firstLastPageMove}/>*/}
                 </div>
             </div>
         </div>
-    )
+)
 }
 
 export default MemberList;

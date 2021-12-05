@@ -5,13 +5,11 @@ function Users(props) {
         props.editUser({email: props.user.email, name: props.user.name, authority: props.user.authority, address: props.user.address})
     }
     return (
-        <div className="user-list cp" onClick={userEditPageMoveEvent}>
-            <span>
-                <span>{props.user.name}</span>
-            </span>
-            <span className="email">{props.user.email}</span>
-            <span>{props.user.authority === 'ROLE_USER' ? 'USER' : 'ADMIN'}</span>
-        </div>
+        <tr onClick={userEditPageMoveEvent}>
+            <td className="text-center">{props.user.name}</td>
+            <td className="text-center">{props.user.email}</td>
+            <td className="text-center">{props.user.authority === 'ROLE_USER' ? 'USER' : 'ADMIN'}</td>
+        </tr>
     )
 }
 

@@ -8,13 +8,14 @@ const BoardItem = (props) => {
     let {id} = useParams();
     const [itemDetail, setItemDetail] = useState(null);
     const [viewMode, setViewMode] = useState(true);
-    // const [editTile, setEditTitle] = useState(itemDetail.title);
-    // const [editContent, setEditContent] = useState(null);
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token'))?.sub);
+    const [thisItemEmail, setItemUserEmail] = useState(props.location.state);
+    console.log('정보를알려다오', itemDetail);
 
     useDispatch();
     useEffect(() => {
         if (itemDetail === null) {
-            getBoardItem(id)
+            getBoardItem(id);
         }
     })
     const getBoardItem = () => {
@@ -97,35 +98,59 @@ const BoardItem = (props) => {
                 viewMode ?
                     <div className="body-wrapper">
                         <div className="header-area">
-                            <button onClick={() => setViewMode(false)}>수정</button>
-                            <button onClick={(delBoardItem)}>삭제</button>
-                            <button onClick={() => {
-                                props.history.push("/board");
-                            }
-                            }>목록</button>
-                            <div className="title">{itemDetail.title}</div>
-                            <div className="sub-info">
-                                <div><strong>조회수 : </strong>{itemDetail.viewCount}회</div>
-                                <div><strong>작성자 : </strong>{itemDetail.memberEmail}</div>
-                                <div><strong>작성일 : </strong>{itemDetail.createDate}</div>
+                            <div className="d-flex button-area mb-40">
+                                <button onClick={() => {
+                                    props.history.push("/board");
+                                }
+                                } className="button line dark small">목록
+                                </button>
+                                {thisItemEmail === token ?
+                                    <div className="ml-auto">
+                                        <button onClick={() => setViewMode(false)}
+                                                className="button line dark small mr-10">수정
+                                        </button>
+                                        <button onClick={delBoardItem} className="button line dark small">삭제</button>
+                                    </div>
+                                    :
+                                    ""
+                                }
                             </div>
+                            <div className="title-wrapper d-flex">
+                                <div className="title mb-10">
+                                    {itemDetail.title}
+                                </div>
+                                <div className="d-flex">
+                                    <span><strong>조회수 : </strong>{itemDetail.viewCount}회</span>
+                                    <span><strong>작성자 : </strong>{itemDetail.memberEmail}</span>
+                                    <span><strong>작성일 : </strong>{itemDetail.createDate}</span>
+                                </div>
+                            </div>
+                            {/*<div className="sub-info">*/}
+                            {/*    <div><strong>조회수 : </strong>{itemDetail.viewCount}회</div>*/}
+                            {/*    <div><strong>작성자 : </strong>{itemDetail.memberEmail}</div>*/}
+                            {/*    <div><strong>작성일 : </strong>{itemDetail.createDate}</div>*/}
+                            {/*</div>*/}
                         </div>
                         <div className="body-area">{itemDetail.content}</div>
                         <div className="reply-wrapper">
-                            <h4>댓글</h4>
-                            <div className="reply-input-wrapper">
+                            <div className="d-flex mb-20">
+                                <h4 className="mr-10">댓글</h4>
                                 <input type="text"
-                                       className="input_form"
+                                       className="input_form d-grow mr-10"
                                        onChange={(e) => setNewReply(e.target.value)}
                                 />
-                                <button className="cp regist_button" onClick={saveReply}>등록</button>
+                                <button className="button dark" onClick={saveReply}>등록</button>
                             </div>
                             {
                                 itemDetail.replies.map(item => (
                                         <div className="reply-view-item" key={item.seq}>
                                             <div
-                                                className={item.content === '삭제된 댓글 입니다.' ? 'del' : ''}>{item.content}</div>
-                                            <button className="cp" onClick={() => deleteReply(item.seq)}>삭제</button>
+                                                className={item.deleted ? 'del' : ''}>{item.content}</div>
+                                            {
+                                                item.memberEmail === token ?
+                                                    <button className="button dark line small"
+                                                            onClick={() => deleteReply(item.seq)}>삭제</button> : ''
+                                            }
                                         </div>
                                     )
                                 )

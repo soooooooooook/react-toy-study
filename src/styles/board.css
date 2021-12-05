@@ -1,68 +1,7 @@
 .header-area {
 
 }
-.header-area .title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0;
-    padding: 10px 0;
-}
 
-.header-area .sub-info {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.header-area .sub-info > div {
-    margin-right: 20px;
-}
-
-.body-area {
-    line-height: 1.5rem;
-    padding: 20px 0;
-    margin-bottom: 40px;
-}
-
-.reply-input-wrapper input{
-    height: 30px;
-    width: calc(100% - 100px);
-    border-radius: 0;
-    margin-right: 10px;
-}
-
-.regist_button {
-    width: 90px;
-    height: 30px;
-}
-
-.reply-wrapper h4 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-.reply-view-item {
-    display: flex;
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.reply-view-item div {
-    margin-right: 10px;
-}
-
-.reply-view-item div.del {
-    color: darkgrey;
-}
-
-.reply-view-item button {
-    width: 50px;
-    border-radius: 0;
-    border: 1px solid black;
-    -webkit-appearance:none;
-}
 
 .board-list-item {
     display: flex;
@@ -82,12 +21,16 @@
 }
 
 .board-list-item .list-title {
-    width: calc(100% - 100px);
+    width: calc(100% - 250px);
     font-weight: 500;
 }
 
 .board-list-item .list-count {
     width: 50px;
+}
+
+.board-list-item .list-email {
+    width: 150px;
 }
 
 .write-button {
