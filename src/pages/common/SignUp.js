@@ -29,7 +29,8 @@ const SignUp = (props) => {
     return(
         <div className="login_page">
             <div className="login_wrapper">
-                <h1 className="logo mb-20">SignUp</h1>
+                <h1 className="logo mb-40 absolute">Toy Project</h1>
+                <h1 className="label mb-40">회원 가입</h1>
                 <form  className="login" onSubmit={(e) => handleSubmit(e)}>
                     <input type="email"
                            placeholder="email"

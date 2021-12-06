@@ -42,7 +42,8 @@ const Login = (props) => {
     return (
         <div className="login_page">
             <div className="login_wrapper">
-                <h1 className="logo mb-40">Toy Project</h1>
+                <h1 className="logo absolute">Toy Project</h1>
+                <h1 className="label mb-20">로그인</h1>
                 <form className="login" onSubmit={(e) => handleSubmit(e)}>
                     <input type="email"
                            placeholder="Email"
@@ -58,9 +59,9 @@ const Login = (props) => {
                         error ? <p className="error_message">아이디와 비밀번호를 확인하세요.</p> : null
                     }
                     <button type="submit"
-                            className="button dark w-100 mb-10">login
+                            className="button dark w-100 mb-10">로그인
                     </button>
-                    <button className="button line dark w-100" onClick={goLogoutPage}>Sign up</button>
+                    <button className="button line dark w-100" onClick={goLogoutPage}>회원 가입</button>
                 </form>
             </div>
         </div>

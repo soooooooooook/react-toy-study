@@ -274,7 +274,23 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
+  position: relative;
+  width: 400px;
+  padding: 80px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.login_wrapper .label {
+  font-size: 25px;
+}
+
+.logo.absolute {
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  transform: translateX(-50%);
+  background-color: white;
 }
 
 .header-area .title-wrapper {
