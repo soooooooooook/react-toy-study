@@ -17,7 +17,7 @@ const App = () => {
     }
 
     return (
-        <div>
+        <div className="body-layout">
             <Route exact path="/" component={Login}/>
             <Route path="/signup" component={SignUp}/>
             <Route path="/member" component={MemberList}/>

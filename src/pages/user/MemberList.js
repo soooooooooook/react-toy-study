@@ -52,34 +52,30 @@ const MemberList = (props) => {
     }
     if (!users) return '<div>로딩중</div>';
     return (
-        <div>
-            <div className="body-layout">
-                <div className="body-wrapper">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th className="sticky-header">Name</th>
-                            <th className="sticky-header">Email</th>
-                            <th className="sticky-header">Authority</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {users.map(user => (
-                            <Users user={user}
-                                   key={user.seq}
-                                   editUser={moveUserPage}
-                            />
-                        ))}
-                        </tbody>
-                    </table>
-                    {/*<PageNation page={totalPage}*/}
-                    {/*            pageActions={pageActions}*/}
-                    {/*            currentPage={currentPage}*/}
-                    {/*            firstLastPageMove={firstLastPageMove}/>*/}
-                </div>
-            </div>
+        <div className="body-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th className="sticky-header">Name</th>
+                    <th className="sticky-header">Email</th>
+                    <th className="sticky-header">Authority</th>
+                </tr>
+                </thead>
+                <tbody>
+                {users.map(user => (
+                    <Users user={user}
+                           key={user.seq}
+                           editUser={moveUserPage}
+                    />
+                ))}
+                </tbody>
+            </table>
+            {/*<PageNation page={totalPage}*/}
+            {/*            pageActions={pageActions}*/}
+            {/*            currentPage={currentPage}*/}
+            {/*            firstLastPageMove={firstLastPageMove}/>*/}
         </div>
-)
+    )
 }
 
 export default MemberList;

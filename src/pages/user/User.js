@@ -35,7 +35,7 @@ const User = (props) => {
             email: selectedUserInfo.email,
             name: selectedUserInfo.name
         }
-        console.log('데이터',data);
+        console.log('데이터', data);
         editMemberApi(data)
             .then(response => {
                 setViewMode(true);
@@ -45,65 +45,63 @@ const User = (props) => {
     }
 
     return (
-        <div className="body-layout">
-            <div className="body-wrapper">
-                <ul className="user-info">
-                    <li>
-                        <div className="label"><strong>Name</strong></div>
-                        {
-                            viewMode ?
-                                <div>
-                                    {selectedUserInfo.name}
-                                </div>
-                                :
-                                <div><input type="text" value={selectedUserInfo.name}
-                                            onChange={(e) => editName(e.target.value)}/></div>
-                        }
-                    </li>
-                    <li>
-                        <div className="label"><strong>email</strong></div>
-                        <div>
-                            {selectedUserInfo.email}
-                        </div>
-                    </li>
-                    {auth !== "ROLE_USER" ?
-                        <li>
-                            <div className="label"><strong>Address</strong></div>
+        <div className="body-wrapper">
+            <ul className="user-info">
+                <li>
+                    <div className="label"><strong>Name</strong></div>
+                    {
+                        viewMode ?
                             <div>
-                                {selectedUserInfo.address.city},{selectedUserInfo.address.street},{selectedUserInfo.address.zipcode}
+                                {selectedUserInfo.name}
                             </div>
-                        </li>
-                        : ''
+                            :
+                            <div><input type="text" value={selectedUserInfo.name}
+                                        className="input_form"
+                                        onChange={(e) => editName(e.target.value)}/></div>
                     }
+                </li>
+                <li>
+                    <div className="label"><strong>email</strong></div>
+                    <div>
+                        {selectedUserInfo.email}
+                    </div>
+                </li>
+                {auth !== "ROLE_USER" ?
                     <li>
-                        <div className="label"><strong>Authority</strong></div>
+                        <div className="label"><strong>Address</strong></div>
                         <div>
-                            {selectedUserInfo.authority}
+                            {selectedUserInfo.address.city},{selectedUserInfo.address.street},{selectedUserInfo.address.zipcode}
                         </div>
                     </li>
-                </ul>
-                {auth !== "ROLE_USER" ?
-                    <div>
-                        {
-                            viewMode ?
-                                <div>
-                                    <button className="edit_button" onClick={() => setViewMode(false)}>Edit</button>
-                                    <button className="edit_button" onClick={() => props.history.push("/member")}>목록
-                                    </button>
-                                </div>
-                                :
-                                <div>
-                                    
-                                <button className="edit_button" onClick={editMember}>완료</button>
-                                    <button className="edit_button" onClick={() => props.history.push("/member")}>취소
-                                    </button>
-                                </div>
-                        }
-                        <button className="edit_button del" onClick={deleteMember}>Delete</button>
-                    </div>
                     : ''
                 }
-            </div>
+                <li>
+                    <div className="label"><strong>Authority</strong></div>
+                    <div>
+                        {selectedUserInfo.authority}
+                    </div>
+                </li>
+            </ul>
+            {auth !== "ROLE_USER" ?
+                <div className="d-flex">
+                    {
+                        viewMode ?
+                            <div className="d-flex ml-auto">
+                                <button className="button line dark small mr-10" onClick={() => setViewMode(false)}>수정
+                                </button>
+                                <button className="button line dark small mr-10" onClick={deleteMember}>삭제</button>
+                            </div>
+                            :
+                            <div className="d-flex ml-auto">
+                                <button className="button line dark small mr-10" onClick={editMember}>완료</button>
+                                <button className="button line dark small mr-10" onClick={deleteMember}>삭제</button>
+                            </div>
+                    }
+                    <button className="button line dark small mr-10" onClick={() => props.history.push("/member")}>목록
+                    </button>
+                </div>
+                : ''
+            }
         </div>
     )
 }

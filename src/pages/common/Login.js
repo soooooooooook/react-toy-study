@@ -20,7 +20,7 @@ const Login = (props) => {
                 const result = response.data;
                 if (result.data === ex401) return setError(true);
                 if (result.data.accessToken) {
-                    console.log('데이터를 알려줘',result.data);
+                    console.log('데이터를 알려줘', result.data);
                     const info = jwtDecode(result.data.accessToken);
                     localStorage.setItem('token', JSON.stringify({...result.data, ...info}));
                     dispatch(
@@ -42,26 +42,26 @@ const Login = (props) => {
     return (
         <div className="login_page">
             <div className="login_wrapper">
-                <h1 className="title">Login</h1>
+                <h1 className="logo mb-40">Toy Project</h1>
                 <form className="login" onSubmit={(e) => handleSubmit(e)}>
                     <input type="email"
                            placeholder="Email"
                            value={email}
-                           className="input_form"
+                           className="input_form mb-10"
                            onChange={(e) => setEmail(e.target.value)}/>
                     <input type="password"
                            placeholder="Password"
                            value={password}
-                           className="input_form"
+                           className="input_form mb-20"
                            onChange={(e) => setPassword(e.target.value)}/>
                     {
                         error ? <p className="error_message">아이디와 비밀번호를 확인하세요.</p> : null
                     }
                     <button type="submit"
-                            className="login_button">login
+                            className="button dark w-100 mb-10">login
                     </button>
+                    <button className="button line dark w-100" onClick={goLogoutPage}>Sign up</button>
                 </form>
-                <span className="signup_button" onClick={goLogoutPage}>Sign up</span>
             </div>
         </div>
     )

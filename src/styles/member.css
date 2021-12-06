@@ -10,14 +10,6 @@
     color: white;
     cursor: pointer;
 }
-.body-layout {
-    display: flex;
-    justify-content: center;
-}
-.body-wrapper {
-    width: 1200px;
-    padding: 50px;
-}
 
 .toolbar-wrapper {
     margin-bottom: 50px;

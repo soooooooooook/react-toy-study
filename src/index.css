@@ -3,12 +3,13 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
 }
 ::-webkit-scrollbar { width: 5px; } /* 스크롤 바 */
 
-::-webkit-scrollbar-track { background-color:#fff; } /* 스크롤 바 밑의 배경 */
+::-webkit-scrollbar-track { background-color:#f9f9f9; } /* 스크롤 바 밑의 배경 */
 
-::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; } /* 실질적 스크롤 바 */
+::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px;} /* 실질적 스크롤 바 */
 
 ::-webkit-scrollbar-thumb:hover { background: #ccc; } /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
 
@@ -25,11 +26,11 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 
-input::placeholder {
-  font-size: 0.9rem;
+input::placeholder,
+textarea::placeholder {
   color: #ccc;
 }
 
@@ -40,6 +41,7 @@ li {
 table {
   width: 100%;
   border-collapse: collapse;
+
 }
 
 th {
@@ -50,11 +52,20 @@ th {
   padding: 0 20px;
 }
 
+th:first-child {
+  border-top-left-radius: 8px;
+}
+
+th:last-child {
+  border-top-right-radius: 8px;
+}
+
 td {
   height: 60px;
   padding: 0 20px;
   border-bottom: 1px solid #dadadd;
   font-size: 15px;
+  background-color: white;
 }
 
 tbody tr {
@@ -69,13 +80,36 @@ a {
   text-decoration: none;
 }
 
+#root {
+  height: 100vh;
+}
+
+.body-layout {
+  display: flex;
+  height: calc(100% - 100px);
+  padding: 0 50px;
+  justify-content: center;
+  background-color: white;
+}
+
+.body-wrapper {
+  width: 1200px;
+  padding: 80px 0;
+}
+
 .header-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  left: 0;
   height: 100px;
   padding: 0 50px;
   border-bottom: 1px solid #dadadd;
+  background-color: white;
+  box-shadow: 7px 7px 3px 0 rgb(240 240 240 / 48%);
+  z-index: 10;
 }
 
 .button-wrapper a {
@@ -138,6 +172,12 @@ a {
   text-align: center;
 }
 
+.category-title {
+  display: inline-block;
+  font-size: 25px;
+  color: #0157cb;
+}
+
 .input_form {
   width: 300px;
   height: 40px;
@@ -148,13 +188,42 @@ a {
   /*box-sizing: border-box;*/
 }
 
+.input_label {
+  font-weight: bold;
+}
+
 .d-flex {
   display: flex;
   align-items: center;
 }
 
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-align-c {
+  align-items: center;
+}
+
 .d-grow {
   flex-grow: 1;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-500 {
+  width: 500px;
+}
+
+.h-50 {
+  height: 50px;
+}
+
+.h-300 {
+  height: 300px;
 }
 
 .ml-auto {
@@ -172,8 +241,20 @@ a {
   margin-bottom: 40px;
 }
 
+.mb-50 {
+  margin-bottom: 50px;
+}
+
 .mr-10 {
   margin-right: 10px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.bold {
+  font-weight: 700 !important;
 }
 
 .ver-line {
@@ -188,35 +269,36 @@ a {
   background-color: white;
 }
 
+.login_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+}
+
 .header-area .title-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 90px;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 0;
 }
 
 .title {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
 }
 
-.header-area .sub-info {
+.sub-info {
   display: flex;
   align-items: center;
-  height: 60px;
-  border-bottom: 1px solid #ddd;
-}
-
-.header-area .sub-info > div {
-  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .body-area {
   line-height: 1.5rem;
-  min-height: 200px;
-  padding: 20px;
+  min-height: 150px;
+  padding: 30px;
   margin-bottom: 40px;
 }
 
@@ -226,33 +308,44 @@ a {
 }
 
 .reply-wrapper {
+}
+
+.reply-container {
   border-radius: 4px;
   background-color: #eee;
-  padding: 30px 20px;
+  padding: 30px;
 }
 
 .reply-wrapper h4 {
-  font-size: 1.1rem;
+  font-size: 14px;
 }
 
 .reply-view-item {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  /*border-bottom: 1px solid #ddd;*/
-}
-
-.reply-view-item div {
-  margin-right: 10px;
+  padding: 30px;
+  border-bottom: 1px solid #ddd;
 }
 
 .reply-view-item div.del {
-  color: darkgrey;
+  color: #cccccc;
+}
+
+.reply-sub-info {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #909090;
 }
 
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible {
   outline: none;
+}
+
+textarea {
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
 .error_message {
