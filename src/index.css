@@ -41,31 +41,33 @@ li {
 table {
   width: 100%;
   border-collapse: collapse;
-
+  box-shadow: 7px 7px 3px 0 rgb(240 240 240 / 48%)
 }
 
 th {
   /*background-color: #dadadd;*/
   background-color: #e3ecfb;
-  height: 60px;
-  font-size: 16px;
+  height: 40px;
+  /*font-size: 16px;*/
   padding: 0 20px;
-}
-
-th:first-child {
-  border-top-left-radius: 8px;
-}
-
-th:last-child {
-  border-top-right-radius: 8px;
+  border: 1px solid #e3ecfb;
 }
 
 td {
-  height: 60px;
+  height: 50px;
   padding: 0 20px;
-  border-bottom: 1px solid #dadadd;
+  /*border-bottom: 1px solid #dadadd;*/
   font-size: 15px;
   background-color: white;
+  border-bottom: 1px solid #dadadd;
+}
+
+tr td:first-child {
+  border-left: 1px solid #dadadd;
+}
+
+tr td:last-child {
+  border-right: 1px solid #dadadd;
 }
 
 tbody tr {
@@ -78,6 +80,11 @@ tbody tr:hover {
 
 a {
   text-decoration: none;
+}
+
+tfoot {
+  height: 70px;
+  border: 1px solid #dadadd;
 }
 
 #root {
@@ -158,10 +165,10 @@ a {
   padding: 0 10px;
 }
 
-.table-container {
-  height: 500px;
-  overflow: auto;
-}
+/*.table-container {*/
+/*  height: 500px;*/
+/*  overflow: auto;*/
+/*}*/
 
 .fixed-header {
   position: sticky;

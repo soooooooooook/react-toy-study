@@ -69,6 +69,9 @@ const Board = (props) => {
                         />
                     ))}
                     </tbody>
+                    <tfoot>
+                    풋터
+                    </tfoot>
                 </table>
             </div>
         </div>
